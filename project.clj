@@ -12,6 +12,7 @@
                  [org.omcljs/om "0.8.8"]
                  ;; TEMP
                  [ankha "0.1.5.1-1aab6f"]
+                 [cljs-http "0.1.17"]
                  ;; ONA STUFF
                  [org.clojars.onaio/hatti "0.1.0-SNAPSHOT"]
                  [onaio/milia "0.1.3-SNAPSHOT"]]
