@@ -32,7 +32,8 @@
 (def auth-token nil)
 
 (def private-fields
-  ["surveyor_id" "site_id" "local_contact" "security" "security_comment"])
+  ["surveyor_id" "site_id" "local_contact" "security" "security_comment"
+   "meta/instanceID"])
 
 (defn has-value [key value]
   (fn [m]
