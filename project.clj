@@ -4,11 +4,17 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  :dependencies [[org.clojure/clojure "1.6.0"]
+  :dependencies [;;core HATTI requirements
+                 [org.clojure/clojure "1.6.0"]
                  [org.clojure/clojurescript "0.0-3211"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
-                 [sablono "0.3.4"]
-                 [org.omcljs/om "0.8.8"]]
+                 [sablono "0.3.1"]
+                 [org.omcljs/om "0.8.8"]
+                 ;; TEMP
+                 [ankha "0.1.5.1-1aab6f"]
+                 ;; ONA STUFF
+                 [org.clojars.onaio/hatti "0.1.0-SNAPSHOT"]
+                 [onaio/milia "0.1.3-SNAPSHOT"]]
 
   :plugins [[lein-cljsbuild "1.0.5"]
             [lein-figwheel "0.3.3"]]
@@ -16,7 +22,7 @@
   :source-paths ["src"]
 
   :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"]
-  
+
   :cljsbuild {
     :builds [{:id "dev"
               :source-paths ["src"]
@@ -31,13 +37,13 @@
              {:id "min"
               :source-paths ["src"]
               :compiler {:output-to "resources/public/js/compiled/heritage.js"
-                         :main heritage.core                         
+                         :main heritage.core
                          :optimizations :advanced
                          :pretty-print false}}]}
 
   :figwheel {
-             ;; :http-server-root "public" ;; default and assumes "resources" 
-             ;; :server-port 3449 ;; default
+             ;; :http-server-root "public" ;; default and assumes "resources"
+             :server-port 3000 ;; default
              :css-dirs ["resources/public/css"] ;; watch and update CSS
 
              ;; Start an nREPL server into the running figwheel process
@@ -62,5 +68,5 @@
              ;; :repl false
 
              ;; to configure a different figwheel logfile path
-             ;; :server-logfile "tmp/logs/figwheel-logfile.log" 
+             ;; :server-logfile "tmp/logs/figwheel-logfile.log"
              })
