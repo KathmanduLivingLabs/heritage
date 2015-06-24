@@ -36,7 +36,7 @@
                          :source-map-timestamp true }}
              {:id "min"
               :source-paths ["src"]
-              :compiler {:output-to "resources/public/js/compiled/heritage.js"
+              :compiler {:output-to "resources/public/js/compiled/heritage.min.js"
                          :main heritage.core
                          :optimizations :advanced
                          :pretty-print false}}]}
