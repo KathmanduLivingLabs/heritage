@@ -13,6 +13,7 @@
             [hatti.views.dataview]
             [cljs-http.client :as http]
             [heritage.http :refer [raw-get]]
+            [heritage.details]
             [ankha.core :as ankha]))
 
 ;; CONFIG
@@ -66,4 +67,6 @@
             shared/app-state
             {:target (. js/document (getElementById "map"))
              :shared {:flat-form public-form
-                      :map-config {:mapbox-tiles mapbox-tiles}}})))
+                      :map-config {:mapbox-tiles mapbox-tiles}
+                     :view-type "heritage-details"
+                      }})))
