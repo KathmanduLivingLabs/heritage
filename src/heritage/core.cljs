@@ -11,8 +11,8 @@
             [hatti.utils :refer [json->cljs]]
             [hatti.views :as views]
             [hatti.views.dataview]
-            [cljs-http.client :as http]
-            [heritage.http :refer [raw-get]]
+            ;[cljs-http.client :as http]
+            ;[heritage.http :refer [raw-get]]
             [heritage.details]
             [ankha.core :as ankha]))
 
@@ -48,13 +48,13 @@
 
 ;; define your app data so that it doesn't get over-written on reload
 (go
- (let [data-chan (raw-get "data/49501_data.json")
-       form-chan (http/get "data/49501_form.json")
-       info-chan (http/get "data/49501_info.json")
+ (let [;data-chan (raw-get "data/49501_data.json")
+       ;form-chan (http/get "data/49501_form.json")
+       ;info-chan (http/get "data/49501_info.json")
        ; The following can be enabled once Ona enables CORS access
-       ;data-chan (api/data auth-token dataset-id :raw? true)
-       ;form-chan (api/form auth-token dataset-id)
-       ;info-chan (api/metadata auth-token dataset-id)
+       data-chan (api/data auth-token dataset-id :raw? true)
+       form-chan (api/form auth-token dataset-id)
+       info-chan (api/metadata auth-token dataset-id)
        data (-> (<! data-chan) :body json->cljs)
        form (-> (<! form-chan) :body flatten-form)
        public-form (remove-private-fields form)
