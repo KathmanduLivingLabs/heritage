@@ -10,10 +10,12 @@
   "An initial, empty, app-state, which can be modified to change dataviews."
   []
   (atom
-   {:views [:about]
-    :about-page {}}))
+   {:content {}
+    :volunteer-form {}
+    :volunteer-data {}}))
 
 (def app-state (empty-app-state))
+
 (defn transact!
   [app-state]
   (if (satisfies? om/ITransact app-state) om/transact! swap!))
