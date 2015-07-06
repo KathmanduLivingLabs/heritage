@@ -6,7 +6,7 @@
             [milia.api.io :as io]
             [milia.utils.remote :as milia-remote]
             [hatti.ona.forms :refer [flatten-form]]
-            [hatti.ona.post-process :refer [integrate-attachments!]]
+            [hatti.ona.post-process :refer [integrate-attachments]]
             [hatti.shared :as shared]
             [hatti.utils :refer [json->cljs]]
             [hatti.views :as views]
@@ -86,7 +86,9 @@
   ; (shared/update-app-data! shared/app-state data :rerank? true)
    ;(shared/transact-app-state! shared/app-state [:dataset-info] (fn [_] info))
   ; (volunteer/transact-app-state! volunteer/app-state [:views] (fn [_] [:about]))
-;(integrate-attachments! shared/app-state form)
+    
+(integrate-attachments form data)
+      (println (first (integrate-attachments form data)))
    (om/root widget {:text "hello world"}
             {:target (. js/document (getElementById "volunteer"))
 
