@@ -88,7 +88,7 @@
        data (-> (<! data-chan) :body json->cljs)
        form (-> (<! form-chan) :body flatten-form)
        info (-> (<! info-chan) :body)]
-   ;(.log js/console (clj->js (integrate-attachments form data)))
+   (.log js/console (clj->js (integrate-attachments form data)))
      
 (defn widget [d owner]
   (reify
@@ -102,8 +102,10 @@
              [:div.picture 
               (for [record data]                 
                   [:div.img-name 
+                   (format-answer :img record)
+                   ;(format-answer :name record)
                         ]
-                   (.log js/console (record)))]]))))
+                   )]]))))
    (om/root widget
             app-state
             {:target (. js/document (getElementById "volunteer"))})))
