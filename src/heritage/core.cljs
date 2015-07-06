@@ -13,8 +13,10 @@
             [hatti.views.dataview]
             ;[cljs-http.client :as http]
             ;[heritage.http :refer [raw-get]]
-            [heritage.details]
-            [ankha.core :as ankha]))
+            ;[heritage.details]
+            ;[heritage.volunteer :as volunteer]
+            [ankha.core :as ankha]
+         [om.dom :as dom]))
 
 ;; CONFIG
 (enable-console-print!)
@@ -22,6 +24,7 @@
                                  :data "ona.io"
                                  :ona-api-server-protocol "https"})
 (def dataset-id "49501") ;; Cultural Heritage
+(def dataset-id-n "54006")
 (def mapbox-tiles
   [{:url "http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
     :name "Humanitarian OpenStreetMap Team"
@@ -31,6 +34,13 @@
                   <a href=\"http://hot.openstreetmap.org/\">
                   Humanitarian OpenStreetMap Team</a>."}])
 (def auth-token nil)
+
+(defn widget [data owner]
+  (reify
+    om/IRender
+    (render [this]
+      (dom/h1 nil (:text data)))))
+
 
 (def private-fields
   ["surveyor_id" "site_id" "local_contact" "security" "security_comment"
@@ -48,11 +58,7 @@
 
 ;; define your app data so that it doesn't get over-written on reload
 (go
- (let [;data-chan (raw-get "data/49501_data.json")
-       ;form-chan (http/get "data/49501_form.json")
-       ;info-chan (http/get "data/49501_info.json")
-       ; The following can be enabled once Ona enables CORS access
-       data-chan (api/data auth-token dataset-id :raw? true)
+ (let [data-chan (api/data auth-token dataset-id :raw? true)
        form-chan (api/form auth-token dataset-id)
        info-chan (api/metadata auth-token dataset-id)
        data (-> (<! data-chan) :body json->cljs)
@@ -61,12 +67,27 @@
        info (-> (<! info-chan) :body)]
    (shared/update-app-data! shared/app-state data :rerank? true)
    (shared/transact-app-state! shared/app-state [:dataset-info] (fn [_] info))
-   (shared/transact-app-state! shared/app-state [:views :all] (fn [_] [:map :table :details]))
+   (shared/transact-app-state! shared/app-state [:views :all] (fn [_] [:map :table]))
    (integrate-attachments! shared/app-state public-form)
    (om/root views/tabbed-dataview
             shared/app-state
-            {:target (. js/document (getElementById "map"))
+            {:target (. js/document (getElementById "app"))
              :shared {:flat-form public-form
                       :map-config {:mapbox-tiles mapbox-tiles}
-                     :view-type "heritage-details"
-                      }})))
+                               }})))
+(go
+ (let [data-chan (api/data auth-token dataset-id-n :raw? true)
+       form-chan (api/form auth-token dataset-id-n)
+       info-chan (api/metadata auth-token dataset-id-n)
+       data (-> (<! data-chan) :body json->cljs)
+       form (-> (<! form-chan) :body flatten-form)
+       ;public-form (remove-private-fields form)
+    info (-> (<! info-chan) :body)]
+  ; (shared/update-app-data! shared/app-state data :rerank? true)
+   ;(shared/transact-app-state! shared/app-state [:dataset-info] (fn [_] info))
+  ; (volunteer/transact-app-state! volunteer/app-state [:views] (fn [_] [:about]))
+;(integrate-attachments! shared/app-state form)
+   (om/root widget {:text "hello world"}
+            {:target (. js/document (getElementById "volunteer"))
+
+                                               })))

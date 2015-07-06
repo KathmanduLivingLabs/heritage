@@ -1,0 +1,44 @@
+#volunteer{
+    width: 100px;
+    height:100px;
+    background-color: rgba(255,255,255,0.88);
+    z-index: 2;
+    position: absolute;
+    height: 600px;
+    width: 1200px;
+    float: left;
+    left: 5%;
+    top: 10%;
+    display:none;
+    border-radius: 20px;
+}
+#About {
+  background-color: rgba(255,255,255,0.6);
+  outline: #999999 thin solid;
+  box-shadow: 0px 0px 6px rgba(0,0,0,0.4);
+  position: absolute;
+  float: left;
+  left: 93%;
+  top: 8%;
+  width: 70px;
+  height: 30px;
+  font-size: 20px;
+  text-align: center;
+  border-radius: 2px;
+}
+#About:hover{
+cursor:pointer;
+}
+.closebutton {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  float: left;
+  left: 98%;
+  font-size: 20px;
+  text-align: left;
+  background: transparent;
+}
+.closebutton:hover{
+cursor: pointer;
+}

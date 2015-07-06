@@ -1,1 +1,268 @@
-{"name": "cultural_sites_earthquake_damage", "title": "cultural_sites_earthquake_damage", "sms_keyword": "cultural_sites_earthquake_damage", "default_language": "default", "version": "201505280558", "id_string": "cultural_sites_earthquake_damage", "type": "survey", "children": [{"type": "today", "name": "today"}, {"bind": {"required": "yes"}, "type": "integer", "name": "surveyor_id", "label": "Surveyor_id"}, {"label": "District", "type": "select one", "children": [{"name": "Kathmandu", "label": "Kathmandu"}, {"name": "Bhaktapur", "label": "Bhaktapur"}, {"name": "Lalitpur", "label": "Lalitpur"}, {"name": "other", "label": "Other"}], "name": "district"}, {"bind": {"relevant": "selected(../district, 'other')"}, "type": "text", "name": "district_other", "label": "Specify other."}, {"type": "text", "name": "tole_name", "label": "Tole Name"}, {"type": "text", "name": "city", "label": "City/Village"}, {"type": "text", "name": "site_id", "label": "Site ID"}, {"type": "text", "name": "temple_name", "label": "Temple/Building Name"}, {"label": "Temple Type", "type": "select one", "children": [{"name": "pagoda", "label": "Pagoda Style, multi-storied"}, {"name": "tower_sikhara", "label": "Tower Style/Sikhara"}, {"name": "bahal_bahil", "label": "Bahal, Bahil, Matha"}, {"name": "historic_house", "label": "Historic House"}, {"name": "stupa_chaitya", "label": "Stupa, Chaitya"}, {"name": "stone_temple", "label": "Public Fountain"}, {"name": "small_shrine", "label": "Small Shrine"}, {"name": "other", "label": "Other"}], "name": "temple_type"}, {"bind": {"relevant": "selected(../temple_type, 'other')"}, "type": "text", "name": "temple_type_other", "label": "Specify other."}, {"label": "Damage Level", "type": "select one", "children": [{"name": "completely_collapsed", "label": "Completely Collapsed"}, {"name": "partially_collapsed", "label": "Partially Collapsed/ Major Structural Damage/ High Risk of Collapse"}, {"name": "minor_damage", "label": "Minor Damage"}, {"name": "no_visible", "label": "No Visible Damage"}, {"name": "other", "label": "Other"}], "name": "damage_level"}, {"bind": {"relevant": "selected(../damage_level, 'other')"}, "type": "text", "name": "damage_level_other", "label": "Specify other."}, {"type": "text", "name": "comments_damage", "label": "Comments on Damage"}, {"bind": {"relevant": "${damage_level} != 'no_visible'"}, "label": "Is additional security needed at this site?", "type": "select one", "children": [{"name": "yes", "label": "Yes"}, {"name": "no", "label": "No"}], "name": "security"}, {"bind": {"relevant": "${damage_level} != 'no_visible'"}, "type": "text", "name": "security_comment", "label": "Comments about security"}, {"bind": {"relevant": "${damage_level} != 'no_visible'"}, "type": "text", "name": "local_contact", "label": "Local Contact"}, {"label": "GPS coordinates of temple", "type": "geopoint", "name": "gps_point", "hint": "Stand as close as possible to temple opening to take GPS coordinates"}, {"bind": {"relevant": "${damage_level} != 'no_visible'"}, "type": "note", "name": "note", "label": "If possible, take photos of each side of temple, and of damage"}, {"type": "photo", "name": "photo_a", "label": "Photo 1"}, {"bind": {"relevant": "${damage_level} != 'no_visible'"}, "type": "photo", "name": "photo_b", "label": "Photo 2"}, {"bind": {"relevant": "${damage_level} != 'no_visible'"}, "type": "photo", "name": "photo_c", "label": "Photo 3"}, {"bind": {"relevant": "${damage_level} != 'no_visible'"}, "type": "photo", "name": "photo_d", "label": "Photo 4"}, {"bind": {"relevant": "${damage_level} != 'no_visible'"}, "type": "photo", "name": "photo_e", "label": "Photo 5"}, {"type": "text", "name": "comment", "label": "Other comments"}, {"control": {"bodyless": true}, "type": "group", "children": [{"bind": {"readonly": "true()", "calculate": "concat('uuid:', uuid())"}, "type": "calculate", "name": "instanceID"}], "name": "meta"}]}
+{
+    "name": "cultural_sites_earthquake_damage",
+    "title": "cultural_sites_earthquake_damage",
+    "sms_keyword": "cultural_sites_earthquake_damage",
+    "default_language": "default",
+    "version": "201505280558",
+    "id_string": "cultural_sites_earthquake_damage",
+    "type": "survey",3
+    "children": [
+        {
+            "type": "today",
+            "name": "today"
+        },
+        {
+            "bind": {
+                "required": "yes"
+            },
+            "type": "integer",
+            "name": "surveyor_id",
+            "label": "Surveyor_id"
+        },
+        {
+            "label": "District",
+            "type": "select one",
+            "children": [
+                {
+                    "name": "Kathmandu",
+                    "label": "Kathmandu"
+                },
+                {
+                    "name": "Bhaktapur",
+                    "label": "Bhaktapur"
+                },
+                {
+                    "name": "Lalitpur",
+                    "label": "Lalitpur"
+                },
+                {
+                    "name": "other",
+                    "label": "Other"
+                }
+            ],
+            "name": "district"
+        },
+        {
+            "bind": {
+                "relevant": "selected(../district, 'other')"
+            },
+            "type": "text",
+            "name": "district_other",
+            "label": "Specify other."
+        },
+        {
+            "type": "text",
+            "name": "tole_name",
+            "label": "Tole Name"
+        },
+        {
+            "type": "text",
+            "name": "city",
+            "label": "City/Village"
+        },
+        {
+            "type": "text",
+            "name": "site_id",
+            "label": "Site ID"
+        },
+        {
+            "type": "text",
+            "name": "temple_name",
+            "label": "Temple/Building Name"
+        },
+        {
+            "label": "Temple Type",
+            "type": "select one",
+            "children": [
+                {
+                    "name": "pagoda",
+                    "label": "Pagoda Style, multi-storied"
+                },
+                {
+                    "name": "tower_sikhara",
+                    "label": "Tower Style/Sikhara"
+                },
+                {
+                    "name": "bahal_bahil",
+                    "label": "Bahal, Bahil, Matha"
+                },
+                {
+                    "name": "historic_house",
+                    "label": "Historic House"
+                },
+                {
+                    "name": "stupa_chaitya",
+                    "label": "Stupa, Chaitya"
+                },
+                {
+                    "name": "stone_temple",
+                    "label": "Public Fountain"
+                },
+                {
+                    "name": "small_shrine",
+                    "label": "Small Shrine"
+                },
+                {
+                    "name": "other",
+                    "label": "Other"
+                }
+            ],
+            "name": "temple_type"
+        },
+        {
+            "bind": {
+                "relevant": "selected(../temple_type, 'other')"
+            },
+            "type": "text",
+            "name": "temple_type_other",
+            "label": "Specify other."
+        },
+        {
+            "label": "Damage Level",
+            "type": "select one",
+            "children": [
+                {
+                    "name": "completely_collapsed",
+                    "label": "Completely Collapsed"
+                },
+                {
+                    "name": "partially_collapsed",
+                    "label": "Partially Collapsed/ Major Structural Damage/ High Risk of Collapse"
+                },
+                {
+                    "name": "minor_damage",
+                    "label": "Minor Damage"
+                },
+                {
+                    "name": "no_visible",
+                    "label": "No Visible Damage"
+                },
+                {
+                    "name": "other",
+                    "label": "Other"
+                }
+            ],
+            "name": "damage_level"
+        },
+        {
+            "bind": {
+                "relevant": "selected(../damage_level, 'other')"
+            },
+            "type": "text",
+            "name": "damage_level_other",
+            "label": "Specify other."
+        },
+        {
+            "type": "text",
+            "name": "comments_damage",
+            "label": "Comments on Damage"
+        },
+        {
+            "bind": {
+                "relevant": "${damage_level} != 'no_visible'"
+            },
+            "label": "Is additional security needed at this site?",
+            "type": "select one",
+            "children": [
+                {
+                    "name": "yes",
+                    "label": "Yes"
+                },
+                {
+                    "name": "no",
+                    "label": "No"
+                }
+            ],
+            "name": "security"
+        },
+        {
+            "bind": {
+                "relevant": "${damage_level} != 'no_visible'"
+            },
+            "type": "text",
+            "name": "security_comment",
+            "label": "Comments about security"
+        },
+        {
+            "bind": {
+                "relevant": "${damage_level} != 'no_visible'"
+            },
+            "type": "text",
+            "name": "local_contact",
+            "label": "Local Contact"
+        },
+        {
+            "label": "GPS coordinates of temple",
+            "type": "geopoint",
+            "name": "gps_point",
+            "hint": "Stand as close as possible to temple opening to take GPS coordinates"
+        },
+        {
+            "bind": {
+                "relevant": "${damage_level} != 'no_visible'"
+            },
+            "type": "note",
+            "name": "note",
+            "label": "If possible, take photos of each side of temple, and of damage"
+        },
+        {
+            "type": "photo",
+            "name": "photo_a",
+            "label": "Photo 1"
+        },
+        {
+            "bind": {
+                "relevant": "${damage_level} != 'no_visible'"
+            },
+            "type": "photo",
+            "name": "photo_b",
+            "label": "Photo 2"
+        },
+        {
+            "bind": {
+                "relevant": "${damage_level} != 'no_visible'"
+            },
+            "type": "photo",
+            "name": "photo_c",
+            "label": "Photo 3"
+        },
+        {
+            "bind": {
+                "relevant": "${damage_level} != 'no_visible'"
+            },
+            "type": "photo",
+            "name": "photo_d",
+            "label": "Photo 4"
+        },
+        {
+            "bind": {
+                "relevant": "${damage_level} != 'no_visible'"
+            },
+            "type": "photo",
+            "name": "photo_e",
+            "label": "Photo 5"
+        },
+        {
+            "type": "text",
+            "name": "comment",
+            "label": "Other comments"
+        },
+        {
+            "control": {
+                "bodyless": true
+            },
+            "type": "group",
+            "children": [
+                {
+                    "bind": {
+                        "readonly": "true()",
+                        "calculate": "concat('uuid:', uuid())"
+                    },
+                    "type": "calculate",
+                    "name": "instanceID"
+                }
+            ],
+            "name": "meta"
+        }
+    ]
+}
