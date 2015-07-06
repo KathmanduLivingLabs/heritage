@@ -88,16 +88,18 @@
        info (-> (<! info-chan) :body)]
    ;(.log js/console (clj->js (integrate-attachments form data)))
      
-(defn widget [data owner]
+(defn widget [d owner]
   (reify
     om/IRender
     (render [this]
       (html [:div.container
-             [:div.info (:div data)]
-             [:div.picture (:pic-page
+             [:div.info (:div d)]
+             [:div.picture 
               (for [record data]
-                  [:div.img-name
-                        ]))]]))))
+                 
+                  [:div.img-name 
+                        ]
+                   (.log js/console (record)))]]))))
    (om/root widget
             app-state
             {:target (. js/document (getElementById "volunteer"))})))
