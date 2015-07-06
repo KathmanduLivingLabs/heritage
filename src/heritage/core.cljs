@@ -7,7 +7,9 @@
             [milia.api.io :as io]
             [milia.utils.remote :as milia-remote]
             [hatti.ona.forms :refer [flatten-form]]
+            [hatti.ona.forms :refer [format-answer]]
             [hatti.ona.post-process :refer [integrate-attachments]]
+            [hatti.ona.post-process :refer [integrate-attachments!]]
             [hatti.shared :as shared]
             [hatti.utils :refer [json->cljs]]
             [hatti.views :as views]
@@ -46,7 +48,7 @@
     (remove (set flatr) form)))
 
 ;; define your app data so that it doesn't get over-written on reload
-#_(go
+(go
  (let [data-chan (api/data auth-token dataset-id :raw? true)
        form-chan (api/form auth-token dataset-id)
        info-chan (api/metadata auth-token dataset-id)
@@ -64,11 +66,18 @@
              :shared {:flat-form public-form
                       :map-config {:mapbox-tiles mapbox-tiles}}})))
 
-(defn widget [data owner]
-  (reify
-    om/IRender
-    (render [this]
-      (html [:h1 (:text data)]))))
+(defn empty-app-state
+  "An initial, empty, app-state, which can be modified to change dataviews."
+  []
+  (atom
+      {:view {:all [:content :pic]}
+   :div "we are happy"
+       :pic-page {:data []
+               }}
+    ))
+
+(def app-state (empty-app-state))
+
 
 (go
  (let [data-chan (api/data auth-token dataset-id-n :raw? true)
@@ -77,8 +86,19 @@
        data (-> (<! data-chan) :body json->cljs)
        form (-> (<! form-chan) :body flatten-form)
        info (-> (<! info-chan) :body)]
-   (.log js/console (clj->js (integrate-attachments form data)))
+   ;(.log js/console (clj->js (integrate-attachments form data)))
+     
+(defn widget [data owner]
+  (reify
+    om/IRender
+    (render [this]
+      (html [:div.container
+             [:div.info (:div data)]
+             [:div.picture (:pic-page
+              (for [record data]
+                  [:div.img-name
+                        ]))]]))))
    (om/root widget
-            {:text "hello world"}
+            app-state
             {:target (. js/document (getElementById "volunteer"))})))
 
