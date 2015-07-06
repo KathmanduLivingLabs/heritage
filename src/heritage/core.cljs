@@ -87,9 +87,9 @@
        info-chan (api/metadata auth-token dataset-id-n)
        data (-> (<! data-chan) :body json->cljs)
        form (-> (<! form-chan) :body flatten-form)
-       info (-> (<! info-chan) :body)]
-   (.log js/console (clj->js (integrate-attachments form data)))
-     
+         info (-> (<! info-chan) :body)
+      pic-form (integrate-attachments form data)]
+     (.log js/console pic-form)
 (defn widget [d owner]
   (reify
     om/IRender
@@ -102,7 +102,7 @@
              [:div.picture 
               (for [record data]                 
                   [:div.img-name 
-                   (format-answer :img record)
+                   (format-answer form :name)
                    ;(format-answer :name record)
                         ]
                    )]]))))
