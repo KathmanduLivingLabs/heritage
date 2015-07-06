@@ -70,8 +70,10 @@
   "An initial, empty, app-state, which can be modified to change dataviews."
   []
   (atom
-      {:view {:all [:content :pic]}
-   :div "we are happy"
+      {:view {:all [:background :methodology :involve :pic]}
+   :background "we are happy"
+    :methodology "ok this works"
+    :involve "these are who got involved"
        :pic-page {:data []
                }}
     ))
@@ -93,10 +95,12 @@
     om/IRender
     (render [this]
       (html [:div.container
-             [:div.info (:div d)]
+             [:div.content
+             [:div.background (:background d)]
+             [:div.methodology (:methodology d)]
+             [:div.involve (:involve d)]]
              [:div.picture 
-              (for [record data]
-                 
+              (for [record data]                 
                   [:div.img-name 
                         ]
                    (.log js/console (record)))]]))))
