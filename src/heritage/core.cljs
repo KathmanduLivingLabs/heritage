@@ -1,5 +1,6 @@
 (ns ^:figwheel-always heritage.core
-  (:require-macros [cljs.core.async.macros :refer [go]])
+  (:require-macros [cljs.core.async.macros :refer [go]]
+                   [sablono.core :refer [html]])
   (:require [om.core :as om]
             [cljs.core.async :refer [<! put!]]
             [milia.api.dataset :as api]
@@ -11,12 +12,7 @@
             [hatti.utils :refer [json->cljs]]
             [hatti.views :as views]
             [hatti.views.dataview]
-            ;[cljs-http.client :as http]
-            ;[heritage.http :refer [raw-get]]
-            ;[heritage.details]
-            [heritage.volunteer :as volunteer]
-            [ankha.core :as ankha]
-         [om.dom :as dom]))
+            [heritage.volunteer :as volunteer]))
 
 ;; CONFIG
 (enable-console-print!)
@@ -34,13 +30,6 @@
                   <a href=\"http://hot.openstreetmap.org/\">
                   Humanitarian OpenStreetMap Team</a>."}])
 (def auth-token nil)
-
-(defn widget [data owner]
-  (reify
-    om/IRender
-    (render [this]
-      (dom/h1 nil (:text data)))))
-
 
 (def private-fields
   ["surveyor_id" "site_id" "local_contact" "security" "security_comment"
@@ -73,23 +62,23 @@
             shared/app-state
             {:target (. js/document (getElementById "app"))
              :shared {:flat-form public-form
-                      :map-config {:mapbox-tiles mapbox-tiles}
-                               }})))
+                      :map-config {:mapbox-tiles mapbox-tiles}}})))
+
+(defn widget [data owner]
+  (reify
+    om/IRender
+    (render [this]
+      (html [:h1 (:text data)]))))
+
 (go
  (let [data-chan (api/data auth-token dataset-id-n :raw? true)
        form-chan (api/form auth-token dataset-id-n)
        info-chan (api/metadata auth-token dataset-id-n)
        data (-> (<! data-chan) :body json->cljs)
        form (-> (<! form-chan) :body flatten-form)
-       ;public-form (remove-private-fields form)
-    info (-> (<! info-chan) :body)]
-  ; (shared/update-app-data! shared/app-state data :rerank? true)
-   ;(shared/transact-app-state! shared/app-state [:dataset-info] (fn [_] info))
-  ; (volunteer/transact-app-state! volunteer/app-state [:views] (fn [_] [:about]))
-    
-(integrate-attachments form data)
-    (.log js/console (clj->js (integrate-attachments form data)))`
-   (om/root widget {:text "hello world"}
-            {:target (. js/document (getElementById "volunteer"))
+       info (-> (<! info-chan) :body)]
+   (.log js/console (clj->js (integrate-attachments form data)))
+   (om/root widget
+            {:text "hello world"}
+            {:target (. js/document (getElementById "volunteer"))})))
 
-                                               })))
