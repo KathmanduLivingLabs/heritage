@@ -57,7 +57,7 @@
     (remove (set flatr) form)))
 
 ;; define your app data so that it doesn't get over-written on reload
-(go
+#_(go
  (let [data-chan (api/data auth-token dataset-id :raw? true)
        form-chan (api/form auth-token dataset-id)
        info-chan (api/metadata auth-token dataset-id)
@@ -88,7 +88,7 @@
   ; (volunteer/transact-app-state! volunteer/app-state [:views] (fn [_] [:about]))
     
 (integrate-attachments form data)
-      (println (first (integrate-attachments form data)))
+    (.log js/console (clj->js (integrate-attachments form data)))`
    (om/root widget {:text "hello world"}
             {:target (. js/document (getElementById "volunteer"))
 
