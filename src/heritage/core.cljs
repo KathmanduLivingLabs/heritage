@@ -14,7 +14,7 @@
             ;[cljs-http.client :as http]
             ;[heritage.http :refer [raw-get]]
             ;[heritage.details]
-            ;[heritage.volunteer :as volunteer]
+            [heritage.volunteer :as volunteer]
             [ankha.core :as ankha]
          [om.dom :as dom]))
 

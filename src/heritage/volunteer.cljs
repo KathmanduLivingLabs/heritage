@@ -11,8 +11,7 @@
   []
   (atom
    {:content {}
-    :volunteer-form {}
-    :volunteer-data {}}))
+    :volunteer-data {:data []}}))
 
 (def app-state (empty-app-state))
 
