@@ -9,4 +9,4 @@
   "Om component for the whole details page."
   (om/component
    (html
-    [:div.container "We are happy"])))
+    [:div.container "The page is under development."])))
