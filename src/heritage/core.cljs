@@ -28,7 +28,11 @@
                   OpenStreetMap Contributors.</a>
                   Tiles courtesy of
                   <a href=\"http://hot.openstreetmap.org/\">
-                  Humanitarian OpenStreetMap Team</a>."}])
+                  Humanitarian OpenStreetMap Team</a>."},
+    {:url "https://{s}.tiles.mapbox.com/v4/kll.o16gpfc6/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoia2xsIiwiYSI6IktVRUtfQnMifQ.GJAHJPvusgK_f0NsSXS8QA"
+    :name "Core Monument Zone"},
+     {:url "https://{s}.tiles.mapbox.com/v4/kll.o16jkb3p/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoia2xsIiwiYSI6IktVRUtfQnMifQ.GJAHJPvusgK_f0NsSXS8QA"
+    :name "Buffer Monument Zone"}])
 (def auth-token nil)
 
 (def private-fields
@@ -60,7 +64,7 @@
        info (-> (<! info-chan) :body)]
    (shared/update-app-data! shared/app-state data :rerank? true)
    (shared/transact-app-state! shared/app-state [:dataset-info] (fn [_] info))
-   (shared/transact-app-state! shared/app-state [:views :all] (fn [_] [:map :table :details]))
+   (shared/transact-app-state! shared/app-state [:views :all] (fn [_] [:map :table ]))
    (integrate-attachments! shared/app-state public-form)
    (om/root views/tabbed-dataview
             shared/app-state
