@@ -29,7 +29,8 @@
                   OpenStreetMap Contributors.</a>
                   Tiles courtesy of
                   <a href=\"http://hot.openstreetmap.org/\">
-                  Humanitarian OpenStreetMap Team</a>."}],
+                  Humanitarian OpenStreetMap Team</a>."}])
+  (def mapbox-tiles
                 [{:url "https://{s}.tiles.mapbox.com/v4/kll.haq69a4i/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoia2xsIiwiYSI6IktVRUtfQnMifQ.GJAHJPvusgK_f0NsSXS8QA"
                   :name "Monument Core Zone"
                   :attribution "UNESCO"
