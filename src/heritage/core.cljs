@@ -30,7 +30,7 @@
                   Tiles courtesy of
                   <a href=\"http://hot.openstreetmap.org/\">
                   Humanitarian OpenStreetMap Team</a>."}],
-                [:url "https://{s}.tiles.mapbox.com/v3/kll.monument/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoia2xsIiwiYSI6IktVRUtfQnMifQ.GJAHJPvusgK_f0NsSXS8QA"]
+                [{:url "https://{s}.tiles.mapbox.com/v3/kll.monument/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoia2xsIiwiYSI6IktVRUtfQnMifQ.GJAHJPvusgK_f0NsSXS8QA"}]
                 )
 (def auth-token nil)
 
