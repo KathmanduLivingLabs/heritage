@@ -22,7 +22,21 @@
                                  :data "ona.io"
                                  :ona-api-server-protocol "https"})
 (def dataset-id "49501") ;; Cultural Heritage
-
+(def mapbox-tiles
+  [{:url "http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
+    :name "Humanitarian OpenStreetMap Team"
+    :attribution "&copy;  <a href=\"http://osm.org/copyright\">
+                  OpenStreetMap Contributors.</a>
+                  Tiles courtesy of
+                  <a href=\"http://hot.openstreetmap.org/\">
+                  Humanitarian OpenStreetMap Team</a>."}])
+  (def mapbox-tiles
+                [{:url "https://{s}.tiles.mapbox.com/v4/kll.haq69a4i/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoia2xsIiwiYSI6IktVRUtfQnMifQ.GJAHJPvusgK_f0NsSXS8QA"
+                  :name "Monument Core Zone"
+                  :attribution "UNESCO"
+                  }
+                 ]
+                )
 (def auth-token nil)
 
 (def private-fields
